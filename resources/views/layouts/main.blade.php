@@ -22,6 +22,14 @@
  
     <!-- End Header and Nav -->
 
+    <!-- Adding a success message -->
+    @if(Session::has('message'))
+        <div class="alert-box succes">
+            {{{Session::get('message')}}}
+        </div>
+    @endif
+
+
     <div class="row">
         <div class="large-12">
             @yield('content')

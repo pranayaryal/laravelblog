@@ -11,6 +11,7 @@ use App\TodoList;
 use Illuminate\Support\Facades\Input;
 use Redirect;
 use Validator;
+use Illuminate\Support\MessageBag;
 
 class TodoListController extends Controller
 {
@@ -56,13 +57,14 @@ class TodoListController extends Controller
 
         //test validity
         if ($validator->fails()){
-            return Redirect::route('todos.create');
+            
+            return Redirect::route('todos.create')->withErrors($validator)->withInput();
         }
         $name = Input::get('title');
         $list = new TodoList();
         $list->name = $name;
         $list -> save();
-        return Redirect::route('todos.index');
+        return Redirect::route('todos.index')->withMessage('List Was Created!');
     }
 
     /**

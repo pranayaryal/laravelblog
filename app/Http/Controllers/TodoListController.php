@@ -17,7 +17,7 @@ class TodoListController extends Controller
 {
     public function _construct()
     {
-        $this->beforeFilter('csrf',array('on' => 'post'));
+        $this->beforeFilter('csrf',array('on' => ['post','put']));
     }
     /**
      * Display a listing of the resource.
@@ -87,7 +87,8 @@ class TodoListController extends Controller
      */
     public function edit($id)
     {
-        //
+        $list = TodoList::findOrFail($id);
+        return View::make('todos.edit')->withList($list);
     }
 
     /**
@@ -98,7 +99,24 @@ class TodoListController extends Controller
      */
     public function update($id)
     {
-        //
+
+        //define rules for validation
+        $rules = array(
+                'name' => array('required','unique:todo_lists')
+            );
+        //pass input to rules using validarot class
+        $validator = Validator::make(Input::all(), $rules);
+
+        //test validity
+        if ($validator->fails()){
+            
+            return Redirect::route('todos.edit',$id)->withErrors($validator)->withInput();
+        }
+        $name = Input::get('name');
+        $list = TodoList::findOrFail($id);
+        $list->name = $name;
+        $list -> update();
+        return Redirect::route('todos.index')->withMessage('List Was Updated!');
     }
 
     /**
@@ -109,6 +127,8 @@ class TodoListController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $todo_list = TodoList::findOrFail($id)->delete();
+
+        return Redirect::route('todos.index')->withMessage('Item Deleted');
     }
 }

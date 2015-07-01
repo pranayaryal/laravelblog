@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\TodoList;
+use App\TodoItem;
 use Illuminate\Support\Facades\Input;
 use Redirect;
 use Validator;
 use Illuminate\Support\MessageBag;
+use Illuminate\Database\Eloquent\Collection;
 
 class TodoListController extends Controller
 {
@@ -76,7 +78,11 @@ class TodoListController extends Controller
     public function show($id)
     {
         $list = TodoList::findOrFail($id);
-        return View::make('todos.show')->withList($list);
+        $items = $list->listItems()->get();
+        //return $items;
+        return View::make('todos.show')
+            ->withList($list)
+            ->withItems($items);
     }
 
     /**

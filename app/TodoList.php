@@ -4,7 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class TodoList extends Model
 {
-    //protected $table = 'todo_lists';
+    public function listItems()
+	{
+
+    	return $this->hasMany('App\TodoItem');
+    }
 }

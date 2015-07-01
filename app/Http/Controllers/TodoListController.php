@@ -50,7 +50,7 @@ class TodoListController extends Controller
     {
         //define rules for validation
         $rules = array(
-                'title' => array('required','unique:todo_lists,name')
+                'name' => array('required','unique:todo_lists')
             );
         //pass input to rules using validarot class
         $validator = Validator::make(Input::all(), $rules);
@@ -60,7 +60,7 @@ class TodoListController extends Controller
             
             return Redirect::route('todos.create')->withErrors($validator)->withInput();
         }
-        $name = Input::get('title');
+        $name = Input::get('name');
         $list = new TodoList();
         $list->name = $name;
         $list -> save();

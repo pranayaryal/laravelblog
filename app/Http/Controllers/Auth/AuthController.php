@@ -6,6 +6,8 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
@@ -21,7 +23,7 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers;
-
+    
     /**
      * Create a new authentication controller instance.
      *
@@ -61,4 +63,10 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    protected $redirectPath = '/home';
+    
+    protected $loginPath = '/auth/login';
+
+    
 }

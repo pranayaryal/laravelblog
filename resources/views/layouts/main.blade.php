@@ -44,7 +44,7 @@
             <hr />
             <div class="row">
                 <div class="large-6 columns">
-                    <p>© Team Treehouse</p>
+                    <p>© 2015 Pranay Aryal</p>
                 </div>
             </div>
         </div>

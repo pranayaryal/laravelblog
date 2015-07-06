@@ -14,11 +14,14 @@ use Redirect;
 use Validator;
 use Illuminate\Support\MessageBag;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
+
 
 class TodoListController extends Controller
 {
     public function _construct()
     {
+        $this->middleware('auth');
         $this->beforeFilter('csrf',array('on' => ['post','put']));
     }
     /**
@@ -28,9 +31,14 @@ class TodoListController extends Controller
      */
     public function index()
     {
+       
        $todo_lists = TodoList::all();
        return View::make('todos.index') -> with('todo_lists', $todo_lists);
+
+       
+       
     }
+
 
     /**
      * Show the form for creating a new resource.

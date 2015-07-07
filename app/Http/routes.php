@@ -15,7 +15,7 @@
 
 
 
-//Route::get('/', 'TodoListController@index');
+
 Route::get('/', function(){
 	return View::make('todos.welcome');
 });

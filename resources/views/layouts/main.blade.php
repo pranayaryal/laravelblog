@@ -5,57 +5,56 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Pranay Aryal | A Laravel Application</title>
         <link rel="stylesheet" href="{{ asset('css/foundation.css')}}" />
+        <link rel="stylesheet" href="{{ asset('css/app.css')}}" />
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
         <script src="{{asset('js/vendor/modernizr.js') }}"></script>
     </head>
 
-<body>
+    <body>
 
     <!-- Header and Nav -->
- 
-    <nav class="top-bar" data-topbar>
-        <ul class="title-area">
-            <li class="name">
-                <h1><a href="/todos">PRANAY ARYAL</a></h1>
-            </li>
-        </ul>
-    </nav>
- 
-    <!-- End Header and Nav -->
+     
+        @include('partials.nav')
+     
+        <!-- End Header and Nav -->
 
-    <!-- Adding a success message -->
-    @if(Session::has('message'))
-        <div class="alert-box succes">
-            {{{Session::get('message')}}}
-        </div>
-    @endif
+        <!-- Adding a success message -->
+        @if(Session::has('flash_message'))
+            <div class="alert-box default">
+                {!! Session::get('flash_message') !!}
+            </div>
+        @endif
+
+        @if (Session::has('success'))
+            <div class="alert alert-success">
+                {!! Session::get('success') !!}
+            </div>
+       @endif
 
 
-    <div class="row">
-        <div class="large-12">
-            @yield('content')
-        </div>
-    </div>
- 
- 
-    <!-- Footer -->
- 
-    <footer class="row">
-        <div class="large-12 columns">
-            <hr />
-            <div class="row">
-                <div class="large-6 columns">
-                    <p>© 2015 Pranay Aryal</p>
-                </div>
+       <div class="row">
+            <div class="large-12">
+                @yield('content')
             </div>
         </div>
-    </footer>
+ 
+ 
+    
+ 
+    
+        
+            
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+        <script src="{{asset('js/vendor/jquery.js')}}"></script>
+        <script src="{{asset('js/foundation.min.js')}}"></script>
 
-    <script src='js/vendor/jquery.js'></script>
-    <script src="js/foundation.min.js"></script>
-
-    <script src="js/app.js"></script>
-    <script>
-      $(document).foundation();
-    </script>
+        <script src="{{asset('js/app.js')}}"></script>
+        <script>
+          $(document).foundation();
+        </script>
+        <div class = "row">
+            @yield('footer')
+        </div>
     </body>
 </html>

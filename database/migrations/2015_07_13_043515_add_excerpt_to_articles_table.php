@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTodoListsTable extends Migration
+class AddExcerptToArticlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,8 @@ class CreateTodoListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('todo_lists', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name')->unique();
-            $table->timestamps();
+        Schema::table('articles', function (Blueprint $table) {
+            $table->text('excerpt')->nullable();
         });
     }
 
@@ -26,6 +24,8 @@ class CreateTodoListsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('todo_lists');
+        Schema::table('articles', function (Blueprint $table) {
+            $table->dropColumn('excerpt');
+        });
     }
 }

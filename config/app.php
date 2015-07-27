@@ -145,6 +145,8 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
+        App\Providers\ViewComposerServiceProvider::class
 
     ],
 
@@ -193,8 +195,11 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        //'Form'      => Illuminate\Html\FormFacade,
+        //'Html'      => Illuminate\Html\HtmlFacade
         'Form'      => 'Collective\Html\FormFacade',
-        'Html'      => 'Collective\Html\HtmlFacade'
+        'Html'      => 'Collective\Html\HtmlFacade',
+        'Flash'     => 'Laracasts\Flash\Flash'
         
 
     ],

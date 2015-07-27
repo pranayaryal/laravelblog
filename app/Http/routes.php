@@ -13,40 +13,41 @@
 
 
 
+Route::get('about', 'PagesController@about');
+
+Route::get('/', 'PagesController@index');
+Route::get('contact', 'PagesController@contact');
+
+Route::resource('articles', 'ArticlesController');
+
+Route::get('tags/{tags}', 'TagsController@show');
+
+Route::controllers([
+
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController'
+
+]);
 
 
 
-Route::get('/', function(){
-	return View::make('todos.welcome');
-});
-Route::get('/home', 'TodoListController@index');
+Route::get('auth/logout', 
+	array('as' => 'auth.logout', 
+		'uses' => 'Auth\AuthController@getLogout'));
 
-Route::resource('todos', 'TodoListController');
-Route::resource('todos.items', 'TodoItemController', ['except'=> ['index']]);
-Route::patch('/todos/{todos}/items/{items}/complete', 
-	['as' => 'todos.items.complete', 'uses' => 'TodoItemController@complete']);
-// Authentication routes...
-//Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::get('auth/login', 
 	array('as' => 'auth.login', 
 		'uses' => 'Auth\AuthController@getLogin'));
 
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 
-	array('as' => 'auth.logout', 
-		'uses' => 'Auth\AuthController@getLogout'));
-//Route::get('auth/logout', 'Auth\AuthController@getLogout');
-
-// Registration routes...
 Route::get('auth/register', 
 	array('as' => 'auth.register', 
 		'uses' => 'Auth\AuthController@getRegister'));
-//Route::get('auth/register', 'Auth\AuthController@getRegister');
 
-Route::post('auth/register', 'Auth\AuthController@postRegister');
-// Event::listen('illuminate.query', function($query){
-// 	var_dump($query);
-// });
 
+
+Route::get('foo', ['middleware' => 'manager', function()
+{
+	return 'this page may be only viewed by managers';
+}]);
 
 

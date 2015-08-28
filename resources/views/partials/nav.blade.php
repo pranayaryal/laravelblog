@@ -21,7 +21,7 @@
           </li>
         </ul>
 
-        <ul class="right">
+        <ul class="righeet">
             <li>{!! link_to_action('ArticlesController@show', "Go to the latest blog: ".$latest->title, [$latest->id])!!}</li>
             
         </ul>
